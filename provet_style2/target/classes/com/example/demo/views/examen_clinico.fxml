@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.net.URL?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controllers.ExamenClinicoController" prefWidth="1000" prefHeight="700">
+    <stylesheets><URL value="@estilo.css"/></stylesheets>
+
+        <top>
+        <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="14">
+            <Button text="← Historia Clínica" onAction="#irHistoriaClinica" styleClass="btn-back"/>
+            <Label text="🔬 Examen Clínico y Plan Terapéutico" styleClass="header-titulo"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="💾 Guardar" onAction="#onGuardar" styleClass="btn-primario"/>
+            <Button text="← Dashboard" onAction="#irDashboard" styleClass="btn-back"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style=" -fx-background: #f0f7f2;">
+            <VBox spacing="14" style="-fx-padding: 24;">
+
+                <!-- Examen clínico general -->
+                <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 10;
+                             -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                    <Label text="EXAMEN CLÍNICO GENERAL"
+                           style="-fx-font-size: 12; -fx-font-weight: bold;
+                                  -fx-text-fill: #2d6a4f; -fx-padding: 0 0 10 0;"/>
+                    <HBox spacing="20">
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Actitud" style="-fx-text-fill: #444444; -fx-font-weight: bold;"/>
+                            <ComboBox fx:id="cmbActitud" maxWidth="Infinity"
+                                      promptText="Selecciona..."/>
+
+                            <Label text="Condición Corporal" style="-fx-text-fill: #444444; -fx-font-weight: bold; -fx-padding: 6 0 0 0;"/>
+                            <ComboBox fx:id="cmbCondicion" maxWidth="Infinity"
+                                      promptText="Selecciona..."/>
+
+                            <Label text="Estado de Hidratación" style="-fx-text-fill: #444444; -fx-font-weight: bold; -fx-padding: 6 0 0 0;"/>
+                            <ComboBox fx:id="cmbHidratacion" maxWidth="Infinity"
+                                      promptText="Selecciona..."/>
+                        </VBox>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Mucosas" style="-fx-text-fill: #444444; -fx-font-weight: bold;"/>
+                            <HBox spacing="10">
+                                <Label text="Conjuntival:" style="-fx-text-fill: #666666;" prefWidth="100"/>
+                                <TextField fx:id="txtMucConjuntival" promptText="Normal / Anormal"
+                                           HBox.hgrow="ALWAYS"
+                                           style=" 
+                                                  -fx-border-color: #b0c8b0; -fx-border-radius: 4;
+                                                  -fx-background-radius: 4; -fx-padding: 4;"/>
+                            </HBox>
+                            <HBox spacing="10">
+                                <Label text="Oral:" style="-fx-text-fill: #666666;" prefWidth="100"/>
+                                <TextField fx:id="txtMucOral" promptText="Normal / Anormal"
+                                           HBox.hgrow="ALWAYS"
+                                           style=" 
+                                                  -fx-border-color: #b0c8b0; -fx-border-radius: 4;
+                                                  -fx-background-radius: 4; -fx-padding: 4;"/>
+                            </HBox>
+                            <HBox spacing="10">
+                                <Label text="Rectal:" style="-fx-text-fill: #666666;" prefWidth="100"/>
+                                <TextField fx:id="txtMucRectal" promptText="Normal / Anormal"
+                                           HBox.hgrow="ALWAYS"
+                                           style=" 
+                                                  -fx-border-color: #b0c8b0; -fx-border-radius: 4;
+                                                  -fx-background-radius: 4; -fx-padding: 4;"/>
+                            </HBox>
+                            <HBox spacing="10">
+                                <Label text="Vulvar/Prepucial:" style="-fx-text-fill: #666666;" prefWidth="100"/>
+                                <TextField fx:id="txtMucVulvar" promptText="Normal / Anormal"
+                                           HBox.hgrow="ALWAYS"
+                                           style=" 
+                                                  -fx-border-color: #b0c8b0; -fx-border-radius: 4;
+                                                  -fx-background-radius: 4; -fx-padding: 4;"/>
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Sistemas -->
+                <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 10;
+                             -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                    <Label text="EXPLORACIÓN POR SISTEMAS"
+                           style="-fx-font-size: 12; -fx-font-weight: bold;
+                                  -fx-text-fill: #2d6a4f; -fx-padding: 0 0 10 0;"/>
+                    <HBox spacing="16">
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Cardiovascular" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtCardiovascular" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                            <Label text="Respiratorio" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtRespiratorio" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                            <Label text="Digestivo" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtDigestivo" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                        </VBox>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Musculoesquelético" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtMusculo" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                            <Label text="Sistema Nervioso" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtNervioso" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                            <Label text="Genitourinario" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtGenitourinario" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                        </VBox>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Piel y Anexos" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtPiel" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                            <Label text="Nódulos Linfáticos" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtNodulos" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                            <Label text="Locomoción" style="-fx-text-fill: #666666; -fx-font-size: 11;"/>
+                            <TextArea fx:id="txtLocomocion" prefHeight="55" wrapText="true"
+                                      promptText="Hallazgos..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Diagnóstico diferencial -->
+                <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 10;
+                             -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                    <Label text="DIAGNÓSTICO"
+                           style="-fx-font-size: 12; -fx-font-weight: bold;
+                                  -fx-text-fill: #2d6a4f; -fx-padding: 0 0 10 0;"/>
+                    <HBox spacing="16">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="Hallazgos / Signos y Síntomas" style="-fx-text-fill: #444444;"/>
+                            <TextArea fx:id="txtSignos" prefHeight="80" wrapText="true"
+                                      promptText="Lista de signos y síntomas encontrados..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="Posibles Enfermedades" style="-fx-text-fill: #444444;"/>
+                            <TextArea fx:id="txtPosiEnfermedades" prefHeight="80" wrapText="true"
+                                      promptText="Diagnóstico diferencial..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="Diagnóstico Definitivo" style="-fx-text-fill: #444444;"/>
+                            <TextArea fx:id="txtDiagDefinitivo" prefHeight="80" wrapText="true"
+                                      promptText="Diagnóstico final..."
+                                      style=" 
+                                             -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                             -fx-background-radius: 6;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Plan terapéutico -->
+                <VBox style="-fx-background-color: #ffffff; -fx-background-radius: 10;
+                             -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                    <Label text="PLAN TERAPÉUTICO"
+                           style="-fx-font-size: 12; -fx-font-weight: bold;
+                                  -fx-text-fill: #2d6a4f; -fx-padding: 0 0 10 0;"/>
+                    <TableView fx:id="tablaPlan" prefHeight="200"
+                               style=" -fx-border-color: #b0c8b0;">
+                        <columns>
+                            <TableColumn fx:id="colTipo"       text="Tipo"          prefWidth="80"/>
+                            <TableColumn fx:id="colPrincipio"  text="Principio Activo" prefWidth="160"/>
+                            <TableColumn fx:id="colPresentacion" text="Presentación" prefWidth="110"/>
+                            <TableColumn fx:id="colDosis"      text="Dosis Total"   prefWidth="90"/>
+                            <TableColumn fx:id="colVia"        text="Vía"           prefWidth="80"/>
+                            <TableColumn fx:id="colFrecuencia" text="Frecuencia y Duración" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                        <Button text="➕ Agregar Medicamento" onAction="#onAgregarMedicamento"
+                                style="-fx-background-color: #4a9b6f; 
+                                       -fx-font-weight: bold; -fx-background-radius: 6;
+                                       -fx-cursor: hand; -fx-padding: 8 16;"/>
+                        <TextField fx:id="txtFechaControl" promptText="Fecha de control: dd/mm/aaaa"
+                                   HBox.hgrow="ALWAYS"
+                                   style=" 
+                                          -fx-border-color: #b0c8b0; -fx-border-radius: 6;
+                                          -fx-background-radius: 6; -fx-padding: 8;"/>
+                    </HBox>
+                </VBox>
+
+                <Label fx:id="lblMensaje" text=""
+                       style="-fx-font-size: 13; -fx-font-weight: bold;"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

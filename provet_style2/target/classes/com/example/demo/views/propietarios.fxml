@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.net.URL?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controllers.PropietariosController"
+            prefWidth="1000" prefHeight="650"
+            style="-fx-background-color: #f0f7f2;">
+    <stylesheets><URL value="@estilo.css"/></stylesheets>
+
+    <!-- ENCABEZADO -->
+    <top>
+        <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="14">
+            <Button text="← Dashboard" onAction="#irDashboard"
+                    style="-fx-background-color: #3a8060; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-background-radius: 4;
+                           -fx-cursor: hand; -fx-padding: 6 14;"/>
+            <Label text="🏡 Propietarios y Ranchos" styleClass="header-titulo"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblTotal"
+                   style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabsProp" tabClosingPolicy="UNAVAILABLE"
+                 style="-fx-background-color: #f0f7f2; -fx-tab-min-width: 150;">
+
+            <!-- ══ PESTAÑA 1 — Agregar ══ -->
+            <Tab text="➕  Agregar propietario">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+                        <Label text="Registro de nuevo propietario"
+                               style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+
+                        <VBox styleClass="card" style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #c8ddc8; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;">
+                            <Label text="DATOS DEL PROPIETARIO"
+                                   style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #4a9b6f;"/>
+                            <Separator/>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Nombre Completo *" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtNombre" promptText="Ej: Carlos Mendoza"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Nombre del Rancho *" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtRancho" promptText="Ej: Rancho El Roble"/>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Teléfono" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtTelefono" promptText="Ej: 228-123-4567"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Municipio / Localidad" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtMunicipio" promptText="Ej: Coatepec, Ver."/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <Label text="* Campos obligatorios"
+                               style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;"/>
+                        <Label fx:id="lblMensajeAgg" text=""/>
+                        <HBox spacing="10">
+                            <Button text="💾  Guardar" onAction="#onGuardar"
+                                    style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                                           -fx-font-weight: bold; -fx-background-radius: 6;
+                                           -fx-cursor: hand; -fx-padding: 10 24;"/>
+                            <Button text="🧹  Limpiar" onAction="#onLimpiarAgg"
+                                    style="-fx-background-color: #777; -fx-text-fill: white;
+                                           -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 10 24;"/>
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 2 — Editar ══ -->
+            <Tab text="✏  Editar propietario">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+                        <Label text="Editar propietario seleccionado"
+                               style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+
+                        <Label text="Selecciona un propietario desde la Lista y presiona Editar seleccionado, o escribe directamente."
+                               style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777777;"/>
+
+                        <VBox styleClass="card" style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #c8ddc8; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;">
+                            <Label text="DATOS DEL PROPIETARIO"
+                                   style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #4a9b6f;"/>
+                            <Separator/>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Nombre Completo *"
+                                           style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtNombreE" promptText="Ej: Carlos Mendoza"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Nombre del Rancho *"
+                                           style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtRanchoE" promptText="Ej: Rancho El Roble"/>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Teléfono"
+                                           style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtTelefonoE" promptText="Ej: 228-123-4567"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Municipio / Localidad"
+                                           style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                                    <TextField fx:id="txtMunicipioE" promptText="Ej: Coatepec, Ver."/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <Label text="* Campos obligatorios"
+                               style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;"/>
+                        <Label fx:id="lblMensajeEdit" text=""/>
+                        <HBox spacing="10">
+                            <Button text="💾  Guardar cambios" onAction="#onGuardarCambios"
+                                    style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                                           -fx-font-weight: bold; -fx-background-radius: 6;
+                                           -fx-cursor: hand; -fx-padding: 10 24;"/>
+                            <Button text="🧹  Limpiar" onAction="#onLimpiarEditar"
+                                    style="-fx-background-color: #777; -fx-text-fill: white;
+                                           -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 10 24;"/>
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 3 — Lista ══ -->
+            <Tab text="📋  Lista de propietarios">
+                <VBox spacing="12" style="-fx-padding: 20; -fx-background-color: #f0f7f2;">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="txtBuscarLista" promptText="Buscar por nombre, rancho o municipio..."
+                                   HBox.hgrow="ALWAYS"/>
+                        <Button text="🔍 Buscar" onAction="#onBuscarLista"
+                                style="-fx-background-color: #5b8fa8; -fx-text-fill: white;
+                                       -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;"/>
+                        <Button text="✏ Editar seleccionado" onAction="#onIrEditar"
+                                style="-fx-background-color: #5b8fa8; -fx-text-fill: white;
+                                       -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;"/>
+                        <Button text="🗑 Eliminar" onAction="#onEliminar"
+                                style="-fx-background-color: #e53935; -fx-text-fill: white;
+                                       -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;"/>
+                    </HBox>
+                    <Label fx:id="lblMensajeLista" text=""/>
+                    <TableView fx:id="tablaPropietarios" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colId"        text="ID"         prefWidth="70"/>
+                            <TableColumn fx:id="colNombre"    text="Nombre"     prefWidth="200"/>
+                            <TableColumn fx:id="colRancho"    text="Rancho"     prefWidth="180"/>
+                            <TableColumn fx:id="colTelefono"  text="Teléfono"   prefWidth="130"/>
+                            <TableColumn fx:id="colMunicipio" text="Municipio"  prefWidth="150"/>
+                            <TableColumn fx:id="colAnimales"  text="Animales"   prefWidth="80"/>
+                        </columns>
+                    </TableView>
+                    <Label fx:id="lblTotal" text=""
+                           style="-fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

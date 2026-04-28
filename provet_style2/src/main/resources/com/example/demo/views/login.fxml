@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.net.URL?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo.controllers.LoginController"
+      prefWidth="800" prefHeight="500">
+    <stylesheets><URL value="@estilo.css"/></stylesheets>
+
+    <!-- Panel izquierdo verde con logo -->
+    <VBox alignment="CENTER" prefWidth="340" spacing="16"
+          style="-fx-background-color: #4a9b6f; -fx-padding: 40;">
+        <ImageView fitWidth="160" fitHeight="160" preserveRatio="true">
+            <image><Image url="@Boviprobuena.png"/></image>
+        </ImageView>
+        <Label text="BOVIPRO"
+               style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        <Label text="Sistema de Gestión Veterinaria Bovina"
+               wrapText="true" alignment="CENTER"
+               style="-fx-font-size: 12; -fx-text-fill: #d4edda; -fx-alignment: CENTER;"/>
+    </VBox>
+
+    <!-- Panel derecho blanco con formulario -->
+    <VBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="14"
+          style="-fx-background-color: #f0f7f2; -fx-padding: 50 60;">
+
+        <Label text="Bienvenido"
+               style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #004422;"/>
+        <Label text="Ingresa tus credenciales para continuar"
+               styleClass="lbl-hint"/>
+
+        <VBox spacing="6" style="-fx-padding: 20 0 0 0;">
+            <Label text="Usuario:" styleClass="lbl-campo"/>
+            <TextField fx:id="txtUsuario" promptText="Ej: admin"/>
+
+            <Label text="Contraseña:" styleClass="lbl-campo" style="-fx-padding: 10 0 0 0;"/>
+            <PasswordField fx:id="txtPassword" promptText="••••••••"/>
+
+            <Label fx:id="lblError" text="" styleClass="lbl-error"
+                   visible="false" managed="false" wrapText="true"/>
+
+            <Button text="Ingresar" onAction="#onLogin" maxWidth="Infinity"
+                    styleClass="btn-primario"
+                    style="-fx-background-color: #4a9b6f; -fx-text-fill: white; -fx-font-weight: bold;
+                           -fx-background-radius: 4; -fx-padding: 10; -fx-cursor: hand; -fx-font-size: 14;">
+                <VBox.margin><Insets top="12"/></VBox.margin>
+            </Button>
+
+            <!-- Enlace de recuperación -->
+            <Hyperlink fx:id="lnkRecuperar" text="¿Has olvidado tu contraseña?"
+                       onAction="#onRecuperarPassword"
+                       style="-fx-text-fill: #2d6a4f; -fx-font-size: 12; -fx-padding: 6 0 0 0;"/>
+        </VBox>
+
+        <Label text="Prueba: usuario admin / contraseña 1234"
+               styleClass="lbl-hint"/>
+    </VBox>
+</HBox>

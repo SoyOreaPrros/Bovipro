@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="650" prefWidth="1000" style="-fx-background-color: #f0f7f2;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controllers.InventarioController">
+    <stylesheets><URL value="@estilo.css" /></stylesheets>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="header-bar">
+            <Button onAction="#irDashboard" style="-fx-background-color: #3a8060; -fx-text-fill: white;                            -fx-font-weight: bold; -fx-background-radius: 4;                            -fx-cursor: hand; -fx-padding: 6 14;" text="← Dashboard" />
+            <Label styleClass="header-titulo" text="📦 Inventario" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="lblAlerta" style="-fx-text-fill: #e53935; -fx-font-weight: bold;" text="" visible="false" />
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabsInv" style="-fx-background-color: #f0f7f2; -fx-tab-min-width: 150;" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- ══ PESTAÑA 1 — Agregar ══ -->
+            <Tab text="➕  Agregar producto">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;" text="Registro de nuevo producto" />
+
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;                               -fx-border-color: #c8ddc8; -fx-border-radius: 6;                               -fx-background-radius: 6; -fx-spacing: 10;">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #4a9b6f;" text="DATOS DEL PRODUCTO" />
+                            <Separator />
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Nombre del producto *" />
+                                    <TextField fx:id="txtNombreP" promptText="Ej: Vacuna Brucelosis" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Categoría *" />
+                                    <TextField fx:id="txtCategoriaP" promptText="Ej: Vacunas" />
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Cantidad *" />
+                                    <TextField fx:id="txtCantidadP" promptText="Ej: 50" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Precio" />
+                                    <TextField fx:id="txtPrecioP" promptText="Ej: $85.00" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Estado" />
+                                    <ComboBox fx:id="cbxEstadoP" maxWidth="Infinity" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <Label style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;" text="* Campos obligatorios" />
+                        <Label fx:id="lblMensajeAgg" text="" />
+                        <HBox spacing="10">
+                            <Button onAction="#onGuardar" style="-fx-background-color: #4a9b6f; -fx-text-fill: white;                                            -fx-font-weight: bold; -fx-background-radius: 6;                                            -fx-cursor: hand; -fx-padding: 10 24;" text="💾  Guardar" />
+                            <Button onAction="#onLimpiarAgg" style="-fx-background-color: #777; -fx-text-fill: white;                                            -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 10 24;" text="🧹  Limpiar" />
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 2 — Editar ══ -->
+            <Tab text="✏  Editar producto">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;" text="Editar producto" />
+
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                                     -fx-border-color: #c8ddc8; -fx-border-radius: 6;
+                                     -fx-background-radius: 6; -fx-spacing: 10;">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #4a9b6f;" text="DATOS DEL PRODUCTO" />
+                            <Separator />
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Nombre *" />
+                                    <TextField fx:id="txtNombreE" promptText="Ej: Vacuna Brucelosis" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Categoría *" />
+                                    <TextField fx:id="txtCategoriaE" promptText="Ej: Vacunas" />
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Cantidad *" />
+                                    <TextField fx:id="txtCantidadE" promptText="Ej: 50" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Precio" />
+                                    <TextField fx:id="txtPrecioE" promptText="Ej: $85.00" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Estado" />
+                                    <ComboBox fx:id="cbxEstadoE" maxWidth="Infinity" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <Label style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;" text="* Campos obligatorios" />
+                        <Label fx:id="lblMensajeEdit" text="" />
+                        <HBox spacing="10">
+                            <Button onAction="#onGuardarCambios" style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                                            -fx-font-weight: bold; -fx-background-radius: 6;
+                                            -fx-cursor: hand; -fx-padding: 10 24;" text="💾  Guardar cambios" />
+                            <Button onAction="#onLimpiarEditar" style="-fx-background-color: #777; -fx-text-fill: white;
+                                            -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 10 24;" text="🧹  Limpiar" />
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 3 — Lista ══ -->
+            <Tab text="📋  Lista de productos">
+                <VBox spacing="12" style="-fx-padding: 20; -fx-background-color: #f0f7f2;">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <TextField fx:id="txtBuscar" promptText="Buscar por nombre o categoría..." HBox.hgrow="ALWAYS" />
+                        <Button onAction="#onBuscar" style="-fx-background-color: #5b8fa8; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;" text="🔍 Buscar" />
+                        <Button onAction="#onIrEditar" style="-fx-background-color: #5b8fa8; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;" text="✏ Editar seleccionado" />
+                        <Button onAction="#onEliminar" style="-fx-background-color: #e53935; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;" text="🗑 Eliminar" />
+                    </HBox>
+                    <Label fx:id="lblMensajeLista" text="" />
+                    <TableView fx:id="tablaProductos" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colId" prefWidth="70" text="ID" />
+                            <TableColumn fx:id="colNombre" prefWidth="200" text="Nombre" />
+                            <TableColumn fx:id="colCategoria" prefWidth="140" text="Categoría" />
+                            <TableColumn fx:id="colCantidad" prefWidth="90" text="Cantidad" />
+                            <TableColumn fx:id="colPrecio" prefWidth="100" text="Precio" />
+                            <TableColumn fx:id="colEstado" prefWidth="110" text="Estado" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

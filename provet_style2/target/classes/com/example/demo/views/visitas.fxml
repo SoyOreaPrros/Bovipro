@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="650" prefWidth="1000" style="-fx-background-color: #f0f7f2;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controllers.VisitasController">
+    <stylesheets><URL value="@estilo.css" /></stylesheets>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="header-bar">
+            <Button onAction="#irDashboard" style="-fx-background-color: #3a8060; -fx-text-fill: white;                            -fx-font-weight: bold; -fx-background-radius: 4;                            -fx-cursor: hand; -fx-padding: 6 14;" text="← Dashboard" />
+            <Label styleClass="header-titulo" text="🏠 Gestión de Visitas" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="lblTotal" style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabsVisitas" style="-fx-background-color: #f0f7f2; -fx-tab-min-width: 150;" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- ══ PESTAÑA 1 — Agregar ══ -->
+            <Tab text="➕  Nueva visita">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="16" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;" text="Registrar nueva visita" />
+
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;                               -fx-border-color: #c8ddc8; -fx-border-radius: 6;                               -fx-background-radius: 6; -fx-spacing: 10;">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #4a9b6f;" text="DATOS DE LA VISITA" />
+                            <Separator />
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Propietario / Rancho *" />
+                                    <ComboBox fx:id="cbxPropietario" maxWidth="Infinity" promptText="Selecciona propietario..." />
+                                </VBox>
+
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Fecha" />
+                                    <TextField fx:id="txtFecha" promptText="dd/MM/yyyy" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Estado" />
+                                    <ComboBox fx:id="cbxEstado" maxWidth="Infinity" />
+                                </VBox>
+                            </HBox>
+                            <VBox spacing="5">
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Motivo de visita *" />
+                                <TextField fx:id="txtMotivo" promptText="Ej: Vacunación, Revisión general..." />
+                            </VBox>
+                        </VBox>
+
+                        <Label style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;" text="* Campos obligatorios" />
+                        <Label fx:id="lblMensajeAgg" text="" />
+                        <HBox spacing="10">
+                            <Button onAction="#onGuardar" style="-fx-background-color: #4a9b6f; -fx-text-fill: white;                                            -fx-font-weight: bold; -fx-background-radius: 6;                                            -fx-cursor: hand; -fx-padding: 10 24;" text="💾  Guardar" />
+                            <Button onAction="#onLimpiarAgg" style="-fx-background-color: #777; -fx-text-fill: white;                                            -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 10 24;" text="🧹  Limpiar" />
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 2 — Editar ══ -->
+            <Tab text="✏  Editar visita">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="0" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold;
+                                      -fx-text-fill: #2d6a4f; -fx-padding: 0 0 12 0;"
+                               text="Editar visita"/>
+
+                        <!-- DATOS DE LA VISITA -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #c8ddc8; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;" styleClass="card">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #4a9b6f; -fx-padding: 0 0 4 0;"
+                                   text="DATOS DE LA VISITA"/>
+                            <Separator/>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Propietario / Rancho *"/>
+                                    <ComboBox fx:id="cbxPropietarioE" maxWidth="Infinity" promptText="Selecciona propietario..."/>
+                                </VBox>
+
+                            </HBox>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Fecha"/>
+                                    <TextField fx:id="txtFechaE" promptText="dd/MM/yyyy"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Estado"/>
+                                    <ComboBox fx:id="cbxEstadoE" maxWidth="Infinity"/>
+                                </VBox>
+                            </HBox>
+                            <VBox spacing="5">
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Motivo de visita"/>
+                                <TextField fx:id="txtMotivoE" promptText="Ej: Vacunación, Revisión general..."/>
+                            </VBox>
+                        </VBox>
+
+                        <!-- Mensaje y botones -->
+                        <VBox spacing="10" style="-fx-padding: 16 0 0 0;">
+                            <Label style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;"
+                                   text="* Campos obligatorios"/>
+                            <Label fx:id="lblMensajeEdit" text=""/>
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Button onAction="#onLimpiarEditar"
+                                        style="-fx-background-color: #e0e0e0; -fx-text-fill: #333;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="🧹  Limpiar"/>
+                                <Button onAction="#onGuardarCambios"
+                                        style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="💾  Guardar cambios"/>
+                            </HBox>
+                        </VBox>
+
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 3 — Lista ══ -->
+            <Tab text="📋  Lista de visitas">
+                <VBox spacing="12" style="-fx-padding: 20; -fx-background-color: #f0f7f2;">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <TextField fx:id="txtBuscar" promptText="Buscar por propietario, animal o motivo..." HBox.hgrow="ALWAYS" />
+                        <Button onAction="#onBuscar" style="-fx-background-color: #5b8fa8; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;" text="🔍 Buscar" />
+                        <Button onAction="#onIrEditar" style="-fx-background-color: #5b8fa8; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;" text="✏ Editar seleccionado" />
+                        <Button onAction="#onEliminar" style="-fx-background-color: #e53935; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 8 16;" text="🗑 Eliminar" />
+                    </HBox>
+                    <Label fx:id="lblMensajeLista" text="" />
+                    <TableView fx:id="tablaVisitas" prefHeight="368.0" prefWidth="960.0" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colId" prefWidth="65" text="ID" />
+                            <TableColumn fx:id="colPropietario" prefWidth="160" text="Propietario" />
+                            <TableColumn fx:id="colFecha" prefWidth="110" text="Fecha" />
+                            <TableColumn fx:id="colMotivo" prefWidth="190" text="Motivo" />
+                            <TableColumn fx:id="colEstado" prefWidth="120" text="Estado" />
+                        </columns>
+                    </TableView>
+                    <Label fx:id="lblTotal" style="-fx-font-weight: bold; -fx-text-fill: #2d6a4f;" text="" />
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

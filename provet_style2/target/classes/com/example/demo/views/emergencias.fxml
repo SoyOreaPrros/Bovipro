@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="650" prefWidth="1000" style="-fx-background-color: #f0f7f2;"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controllers.EmergenciasController">
+    <stylesheets><URL value="@estilo.css"/></stylesheets>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="header-bar">
+            <Button onAction="#irDashboard"
+                    style="-fx-background-color: #3a8060; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-background-radius: 4;
+                           -fx-cursor: hand; -fx-padding: 6 14;" text="← Dashboard"/>
+            <Label styleClass="header-titulo" text="🚑 Emergencias"/>
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabsEmerg" style="-fx-background-color: #f0f7f2; -fx-tab-min-width: 150;"
+                 tabClosingPolicy="UNAVAILABLE">
+
+            <!-- ══ PESTAÑA 1 — Registrar ══ -->
+            <Tab text="🚨  Registrar emergencia">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="0" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold;
+                                      -fx-text-fill: #c62828; -fx-padding: 0 0 12 0;"
+                               text="Registrar nueva emergencia"/>
+
+                        <!-- DATOS DE LA EMERGENCIA -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #ffcccc; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;" styleClass="card">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #c62828; -fx-padding: 0 0 4 0;"
+                                   text="DATOS DE LA EMERGENCIA"/>
+                            <Separator/>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Animal (ID) *"/>
+                                    <ComboBox fx:id="cbxPaciente" maxWidth="Infinity" promptText="Selecciona animal..."/>
+                                </VBox>
+                                <VBox spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Nivel de urgencia"/>
+                                    <ComboBox fx:id="cmbNivel" prefWidth="150"/>
+                                </VBox>
+                            </HBox>
+                            <VBox spacing="5">
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;"
+                                       text="Descripción de la emergencia *"/>
+                                <TextArea fx:id="txtDescripcion" prefHeight="80"
+                                          promptText="Describe la emergencia con detalle..." wrapText="true"/>
+                            </VBox>
+                        </VBox>
+
+                        <!-- PROPIETARIO -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #ffcccc; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;">
+                            <VBox.margin><javafx.geometry.Insets top="12"/></VBox.margin>
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #c62828; -fx-padding: 0 0 4 0;"
+                                   text="PROPIETARIO"/>
+                            <Separator/>
+                            <VBox spacing="5">
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;"
+                                       text="Propietario / Rancho"/>
+                                <ComboBox fx:id="cbxPropietario" maxWidth="Infinity"
+                                          promptText="Selecciona propietario..."/>
+                            </VBox>
+                        </VBox>
+
+                        <!-- Mensaje y botones -->
+                        <VBox spacing="10" style="-fx-padding: 16 0 0 0;">
+                            <Label style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;"
+                                   text="* Campos obligatorios"/>
+                            <Label fx:id="lblMensajeAgg" text=""/>
+                            <HBox alignment="CENTER_RIGHT" spacing="12">
+                                <Button onAction="#onLimpiarAgg"
+                                        style="-fx-background-color: #e0e0e0; -fx-text-fill: #333;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="🧹  Limpiar"/>
+                                <Button onAction="#onRegistrar"
+                                        style="-fx-background-color: #e53935; -fx-text-fill: white;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="🚨  Registrar"/>
+                            </HBox>
+                        </VBox>
+
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 2 — Editar ══ -->
+            <Tab text="✏  Editar emergencia">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="0" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold;
+                                      -fx-text-fill: #c62828; -fx-padding: 0 0 12 0;"
+                               text="Editar emergencia"/>
+
+                        <!-- DATOS -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #ffcccc; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;" styleClass="card">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #c62828; -fx-padding: 0 0 4 0;"
+                                   text="DATOS DE LA EMERGENCIA"/>
+                            <Separator/>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Animal (ID) *"/>
+                                    <ComboBox fx:id="cbxPacienteE" maxWidth="Infinity" promptText="Selecciona animal..."/>
+                                </VBox>
+                                <VBox spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Nivel de urgencia"/>
+                                    <ComboBox fx:id="cmbNivelE" prefWidth="150"/>
+                                </VBox>
+                            </HBox>
+                            <VBox spacing="5">
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Descripción *"/>
+                                <TextArea fx:id="txtDescripcionE" prefHeight="80" wrapText="true"/>
+                            </VBox>
+                        </VBox>
+
+                        <!-- PROPIETARIO editar -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #ffcccc; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;">
+                            <VBox.margin><javafx.geometry.Insets top="12"/></VBox.margin>
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #c62828; -fx-padding: 0 0 4 0;"
+                                   text="PROPIETARIO"/>
+                            <Separator/>
+                            <VBox spacing="5">
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: #333;"
+                                       text="Propietario / Rancho"/>
+                                <ComboBox fx:id="cbxPropietarioE" maxWidth="Infinity"
+                                          promptText="Selecciona propietario..."/>
+                            </VBox>
+                        </VBox>
+
+                        <!-- Mensaje y botones -->
+                        <VBox spacing="10" style="-fx-padding: 16 0 0 0;">
+                            <Label fx:id="lblMensajeEdit" text=""/>
+                            <HBox alignment="CENTER_RIGHT" spacing="12">
+                                <Button onAction="#onLimpiarEditar"
+                                        style="-fx-background-color: #e0e0e0; -fx-text-fill: #333;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="🧹  Limpiar"/>
+                                <Button onAction="#onGuardarCambios"
+                                        style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="💾  Guardar cambios"/>
+                            </HBox>
+                        </VBox>
+
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══ PESTAÑA 3 — Lista ══ -->
+            <Tab text="📋  Lista de emergencias">
+                <VBox spacing="12" style="-fx-padding: 20; -fx-background-color: #f0f7f2;">
+                    <HBox alignment="CENTER_LEFT" spacing="10"
+                          style="-fx-background-color: white; -fx-border-color: #c8ddc8;
+                                 -fx-border-radius: 6; -fx-padding: 10 14;">
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button onAction="#onIrEditar"
+                                style="-fx-background-color: #5b8fa8; -fx-text-fill: white;
+                                       -fx-font-weight: bold; -fx-background-radius: 4;
+                                       -fx-cursor: hand; -fx-padding: 7 14;" text="✏  Ir a editar"/>
+                        <Button onAction="#onEliminar"
+                                style="-fx-background-color: #e53935; -fx-text-fill: white;
+                                       -fx-font-weight: bold; -fx-background-radius: 4;
+                                       -fx-cursor: hand; -fx-padding: 7 14;" text="🗑  Eliminar"/>
+                    </HBox>
+                    <Label style="-fx-text-fill: #777; -fx-font-size: 11; -fx-font-style: italic;"
+                           text="Selecciona una fila para editarla o eliminarla."/>
+                    <Label fx:id="lblMensajeLista" text=""/>
+                    <TableView fx:id="tablaEmergencias" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colNivel"        prefWidth="110" text="Nivel"/>
+                            <TableColumn fx:id="colPaciente"     prefWidth="130" text="Animal"/>
+                            <TableColumn fx:id="colPropietario2" prefWidth="170" text="Propietario"/>
+                            <TableColumn fx:id="colDescripcion"  prefWidth="300" text="Descripción"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

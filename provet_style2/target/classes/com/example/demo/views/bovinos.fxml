@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="640" prefWidth="1000" style="-fx-background-color: #f0f7f2;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controllers.BovinosController">
+    <stylesheets><URL value="@estilo.css" /></stylesheets>
+
+    <!-- ── HEADER ── -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="header-bar">
+            <Button onAction="#irDashboard" style="-fx-background-color: #3a8060; -fx-text-fill: white;                            -fx-font-weight: bold; -fx-background-radius: 4;                            -fx-cursor: hand; -fx-padding: 6 14;" text="← Dashboard" />
+            <Label styleClass="header-titulo" text="🐄 Gestión de Bovinos" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="lblTotal" style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabsBovinos" style="-fx-background-color: #f0f7f2; -fx-tab-min-width: 150;" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- ══════════════════════════════════════
+                 PESTAÑA 1 — Agregar bovino
+                 ══════════════════════════════════════ -->
+            <Tab text="➕  Agregar bovino">
+                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                    <VBox spacing="0" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+
+                        <!-- Título -->
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold;                                       -fx-text-fill: #2d6a4f; -fx-padding: 0 0 12 0;" text="Registro de nuevo bovino" />
+
+                        <!-- Sección Identificación -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;                               -fx-border-color: #c8ddc8; -fx-border-radius: 6;                               -fx-background-radius: 6; -fx-spacing: 10;" styleClass="card">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;                                           -fx-text-fill: #4a9b6f; -fx-padding: 0 0 4 0;" text="IDENTIFICACIÓN" />
+                            <Separator />
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Número de Arete *" />
+                                    <TextField fx:id="txtArete" promptText="Ej: 998912" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Nombre (si tiene)" />
+                                    <TextField fx:id="txtNombre" promptText="Ej: Vaquita" />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Fecha de Nacimiento" />
+                                    <TextField fx:id="txtFechaNac" promptText="dd/mm/aaaa" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Sección Características -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;                               -fx-border-color: #c8ddc8; -fx-border-radius: 6;                               -fx-background-radius: 6; -fx-spacing: 10;                               -fx-margin: 12 0 0 0;">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;                                           -fx-text-fill: #4a9b6f; -fx-padding: 0 0 4 0;" text="CARACTERÍSTICAS" />
+                            <Separator />
+                            <HBox spacing="20">
+                                <!-- Sexo -->
+                                <VBox prefWidth="200" spacing="8">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Sexo *" />
+                                    <HBox alignment="CENTER_LEFT" spacing="24" style="-fx-background-color: #f5fbf5; -fx-border-color: #b0c8b0; -fx-border-radius: 4; -fx-padding: 8 16;">
+                                        <RadioButton fx:id="rbMacho" style="-fx-text-fill: #222222;" text="Macho" />
+                                        <RadioButton fx:id="rbHembra" style="-fx-text-fill: #222222;" text="Hembra" />
+                                    </HBox>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Propósito" />
+                                    <ComboBox fx:id="cbxProposito" maxWidth="Infinity" promptText="Selecciona..." />
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Raza" />
+                                    <ComboBox fx:id="cbxRaza" maxWidth="Infinity" promptText="Selecciona..." />
+                                </VBox>
+                                <VBox prefWidth="120" spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Peso (kg)" />
+                                    <TextField fx:id="txtPeso" promptText="Ej: 450" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Sección Propietario -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;                               -fx-border-color: #c8ddc8; -fx-border-radius: 6;                               -fx-background-radius: 6; -fx-spacing: 10;">
+                            <VBox.margin><Insets top="12" /></VBox.margin>
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;                                           -fx-text-fill: #4a9b6f; -fx-padding: 0 0 4 0;" text="PROPIETARIO" />
+                            <Separator />
+                            <HBox alignment="CENTER_LEFT" spacing="20">
+                                <VBox prefWidth="280" spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Propietario / Rancho *" />
+                                    <ComboBox fx:id="cbxPropietario" maxWidth="Infinity" promptText="Selecciona propietario..." />
+                                </VBox>
+                                <Label style="-fx-text-fill: #888888; -fx-font-size: 11;                                               -fx-font-style: italic;" text="* Campos obligatorios" />
+                            </HBox>
+                        </VBox>
+
+                        <!-- Mensaje y botones -->
+                        <VBox spacing="10" style="-fx-padding: 16 0 0 0;">
+                            <Label fx:id="lblMensajeAgg" style="-fx-font-size: 13; -fx-font-weight: bold;" text="" wrapText="true" />
+                            <HBox alignment="CENTER_RIGHT" spacing="12">
+                                <Button onAction="#onLimpiarAgg" style="-fx-background-color: #e0e0e0; -fx-text-fill: #333333;                                                -fx-font-weight: bold; -fx-background-radius: 4;                                                -fx-cursor: hand; -fx-padding: 9 22;" text="🧹  Limpiar" />
+                                <Button onAction="#onGuardarBovino" style="-fx-background-color: #4a9b6f; -fx-text-fill: white;                                                -fx-font-weight: bold; -fx-background-radius: 4;                                                -fx-cursor: hand; -fx-padding: 9 22;" text="💾  Guardar Bovino" />
+                            </HBox>
+                        </VBox>
+
+                        <VBox.margin><Insets top="12" /></VBox.margin>
+
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══════════════════════════════════════
+                 PESTAÑA 2 — Editar bovino
+                 ══════════════════════════════════════ -->
+            <Tab text="✏  Editar bovino">
+                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                    <VBox spacing="0" style="-fx-padding: 24; -fx-background-color: #f0f7f2;">
+
+                        <Label style="-fx-font-size: 16; -fx-font-weight: bold;
+                                      -fx-text-fill: #2d6a4f; -fx-padding: 0 0 12 0;"
+                               text="Editar bovino"/>
+
+                        <!-- Sección Identificación -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #c8ddc8; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;" styleClass="card">
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #4a9b6f; -fx-padding: 0 0 4 0;"
+                                   text="IDENTIFICACIÓN"/>
+                            <Separator/>
+                            <HBox spacing="20">
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Número de Arete"/>
+                                    <TextField fx:id="txtAreteE" promptText="Carga primero un bovino"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Nombre"/>
+                                    <TextField fx:id="txtNombreE"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Fecha de Nacimiento"/>
+                                    <TextField fx:id="txtFechaNacE" promptText="dd/mm/aaaa"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Sección Características -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #c8ddc8; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;">
+                            <VBox.margin><javafx.geometry.Insets top="12"/></VBox.margin>
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #4a9b6f; -fx-padding: 0 0 4 0;"
+                                   text="CARACTERÍSTICAS"/>
+                            <Separator/>
+                            <HBox spacing="20">
+                                <VBox prefWidth="200" spacing="8">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Sexo"/>
+                                    <HBox alignment="CENTER_LEFT" spacing="24"
+                                          style="-fx-background-color: #f5fbf5;
+                                                 -fx-border-color: #b0c8b0; -fx-border-radius: 4;
+                                                 -fx-padding: 8 16;">
+                                        <RadioButton fx:id="rbMachoE" style="-fx-text-fill: #222222;" text="Macho"/>
+                                        <RadioButton fx:id="rbHembraE" style="-fx-text-fill: #222222;" text="Hembra"/>
+                                    </HBox>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Propósito"/>
+                                    <ComboBox fx:id="cbxPropositoE" maxWidth="Infinity"/>
+                                </VBox>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Raza"/>
+                                    <ComboBox fx:id="cbxRazaE" maxWidth="Infinity"/>
+                                </VBox>
+                                <VBox prefWidth="120" spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Peso (kg)"/>
+                                    <TextField fx:id="txtPesoE" promptText="Ej: 450"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Sección Propietario -->
+                        <VBox style="-fx-padding: 16; -fx-background-color: white;
+                              -fx-border-color: #c8ddc8; -fx-border-radius: 6;
+                              -fx-background-radius: 6; -fx-spacing: 10;">
+                            <VBox.margin><javafx.geometry.Insets top="12"/></VBox.margin>
+                            <Label style="-fx-font-size: 11; -fx-font-weight: bold;
+                                         -fx-text-fill: #4a9b6f; -fx-padding: 0 0 4 0;"
+                                   text="PROPIETARIO"/>
+                            <Separator/>
+                            <HBox alignment="CENTER_LEFT" spacing="20">
+                                <VBox prefWidth="280" spacing="5">
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333333;" text="Propietario / Rancho"/>
+                                    <ComboBox fx:id="cbxPropietarioE" maxWidth="Infinity"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Mensaje y botones -->
+                        <VBox spacing="10" style="-fx-padding: 16 0 0 0;">
+                            <Label fx:id="lblMensajeEdit"
+                                   style="-fx-font-size: 13; -fx-font-weight: bold;"
+                                   text="" wrapText="true"/>
+                            <HBox alignment="CENTER_RIGHT" spacing="12">
+                                <Button onAction="#onLimpiarEditar"
+                                        style="-fx-background-color: #e0e0e0; -fx-text-fill: #333333;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="🧹  Limpiar"/>
+                                <Button onAction="#onGuardarCambios"
+                                        style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                                               -fx-font-weight: bold; -fx-background-radius: 4;
+                                               -fx-cursor: hand; -fx-padding: 9 22;" text="💾  Guardar cambios"/>
+                            </HBox>
+                        </VBox>
+
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- ══════════════════════════════════════
+                 PESTAÑA 3 — Lista de bovinos
+                 ══════════════════════════════════════ -->
+            <Tab text="📋  Lista de bovinos">
+                <VBox spacing="12" style="-fx-padding: 20; -fx-background-color: #f0f7f2;">
+
+                    <!-- Barra de acciones -->
+                    <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: white; -fx-border-color: #c8ddc8;                                  -fx-border-radius: 6; -fx-padding: 10 14;">
+                        <TextField fx:id="txtBuscarLista" promptText="Buscar por arete, nombre o propietario..." HBox.hgrow="ALWAYS" />
+                        <Button onAction="#onBuscarLista" style="-fx-background-color: #5b8fa8; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4;                                        -fx-cursor: hand; -fx-padding: 7 14;" text="🔍  Buscar" />
+                        <Separator orientation="VERTICAL" />
+                        <Button onAction="#onIrEditar" style="-fx-background-color: #5b8fa8; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4;                                        -fx-cursor: hand; -fx-padding: 7 14;" text="✏  Ir a editar" />
+                        <Button onAction="#onEliminar" style="-fx-background-color: #e53935; -fx-text-fill: white;                                        -fx-font-weight: bold; -fx-background-radius: 4;                                        -fx-cursor: hand; -fx-padding: 7 14;" text="🗑  Eliminar" />
+                    </HBox>
+
+                    <Label style="-fx-text-fill: #777777; -fx-font-size: 11; -fx-font-style: italic;" text="Selecciona una fila para editarla o eliminarla." />
+
+                    <TableView fx:id="tablaBovinos" VBox.vgrow="ALWAYS">
+                        <placeholder>
+                            <Label style="-fx-text-fill: #888888;" text="No hay bovinos. Ve a la pestaña Agregar bovino." />
+                        </placeholder>
+                        <columns>
+                            <TableColumn fx:id="colArete" prefWidth="95" text="# Arete" />
+                            <TableColumn fx:id="colNombreB" prefWidth="110" text="Nombre" />
+                            <TableColumn fx:id="colFDN" prefWidth="90" text="F. Nac." />
+                            <TableColumn fx:id="colSexo" prefWidth="70" text="Sexo" />
+                            <TableColumn fx:id="colProposito" prefWidth="110" text="Propósito" />
+                            <TableColumn fx:id="colPesoB" prefWidth="75" text="Peso" />
+                            <TableColumn fx:id="colRazaB" prefWidth="100" text="Raza" />
+                            <TableColumn fx:id="colPropietarioB" prefWidth="150" text="Propietario" />
+                        </columns>
+                    </TableView>
+
+                    <Label fx:id="lblMensajeLista" style="-fx-font-size: 13; -fx-font-weight: bold;" text="" />
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

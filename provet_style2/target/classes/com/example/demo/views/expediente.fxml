@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.net.URL?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controllers.ExpedienteController" prefWidth="1100" prefHeight="720">
+    <stylesheets><URL value="@estilo.css"/></stylesheets>
+
+    <top>
+        <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="14">
+            <Button text="← Dashboard" onAction="#irDashboard" styleClass="btn-back"/>
+            <Label text="📁 Expediente Clínico" styleClass="header-titulo"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="cmbAnimal" promptText="Selecciona un animal..."
+                      style="-fx-background-color: white;" prefWidth="220"/>
+            <Button text="📂 Cargar" onAction="#onCargar" styleClass="btn-primario"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox style="-fx-padding: 16;">
+            <Label fx:id="lblAnimal" text="Ningún animal seleccionado"
+                   style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #2d6a4f; -fx-padding: 0 0 4 0;"/>
+            <Label fx:id="lblModoLectura" text="🔒 Modo solo lectura — selecciona un animal y presiona Cargar"
+                   style="-fx-font-size: 12; -fx-text-fill: #888888; -fx-padding: 0 0 10 0;"/>
+
+            <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS"
+                     style="-fx-background-color: #ffffff; -fx-tab-min-width: 150;">
+
+                <!-- PESTAÑA 1: Datos del Bovino -->
+                <Tab text="🐄 Datos del Bovino" closable="false">
+                    <ScrollPane fitToWidth="true" style="-fx-background: #f0f7f2;">
+                        <VBox spacing="14" style="-fx-padding: 20;">
+
+                            <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                                <Label text="IDENTIFICACIÓN DEL ANIMAL" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                                <Separator/>
+                                <HBox spacing="16">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="ID / Nombre" style="-fx-text-fill: #444444;"/>
+                                        <TextField fx:id="txtIdAnimal" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Raza" style="-fx-text-fill: #444444;"/>
+                                        <ComboBox fx:id="cmbRaza" maxWidth="Infinity" disable="true"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Sexo" style="-fx-text-fill: #444444;"/>
+                                        <ComboBox fx:id="cmbSexo" maxWidth="Infinity" disable="true"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Edad" style="-fx-text-fill: #444444;"/>
+                                        <TextField fx:id="txtEdad" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                </HBox>
+                                <HBox spacing="16">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Color / Pelaje" style="-fx-text-fill: #444444;"/>
+                                        <TextField fx:id="txtColor" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Peso (kg)" style="-fx-text-fill: #444444;"/>
+                                        <TextField fx:id="txtPeso" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Estado Reproductivo" style="-fx-text-fill: #444444;"/>
+                                        <ComboBox fx:id="cmbReproductivo" maxWidth="Infinity" disable="true"/>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
+
+                            <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                                <Label text="PROPIETARIO" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                                <Separator/>
+                                <HBox spacing="16">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Nombre / Rancho" style="-fx-text-fill: #444444;"/>
+                                        <TextField fx:id="txtPropietario" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Teléfono" style="-fx-text-fill: #444444;"/>
+                                        <TextField fx:id="txtTelProp" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Municipio" style="-fx-text-fill: #444444;"/>
+                                        <TextField fx:id="txtMunicipio" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
+
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+                <!-- PESTAÑA 2: Diagnóstico -->
+                <Tab text="🔬 Diagnóstico" closable="false">
+                    <ScrollPane fitToWidth="true" style="-fx-background: #f0f7f2;">
+                        <VBox spacing="14" style="-fx-padding: 20;">
+                            <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                                <Label text="DIAGNÓSTICO CLÍNICO" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                                <Separator/>
+                                <Label text="Motivo de la consulta" style="-fx-text-fill: #444444;"/>
+                                <TextArea fx:id="txtMotivo" prefHeight="70" wrapText="true" editable="false"
+                                          style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #f5f5f5;"/>
+                                <Label text="Síntomas observados" style="-fx-text-fill: #444444;"/>
+                                <TextArea fx:id="txtSintomas" prefHeight="80" wrapText="true" editable="false"
+                                          style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #f5f5f5;"/>
+                                <HBox spacing="16">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Posibles enfermedades" style="-fx-text-fill: #444444;"/>
+                                        <TextArea fx:id="txtPosiEnf" prefHeight="80" wrapText="true" editable="false"
+                                                  style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Diagnóstico definitivo" style="-fx-text-fill: #444444;"/>
+                                        <TextArea fx:id="txtDiagDef" prefHeight="80" wrapText="true" editable="false"
+                                                  style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                </HBox>
+                                <HBox spacing="16">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Gravedad" style="-fx-text-fill: #444444;"/>
+                                        <ComboBox fx:id="cmbGravedad" maxWidth="Infinity" disable="true"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Pronóstico" style="-fx-text-fill: #444444;"/>
+                                        <ComboBox fx:id="cmbPronostico" maxWidth="Infinity" disable="true"/>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+                <!-- PESTAÑA 3: Tratamiento -->
+                <Tab text="💊 Tratamiento" closable="false">
+                    <ScrollPane fitToWidth="true" style="-fx-background: #f0f7f2;">
+                        <VBox spacing="14" style="-fx-padding: 20;">
+                            <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                                <Label text="PLAN TERAPÉUTICO" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                                <Separator/>
+                                <TableView fx:id="tablaMeds" prefHeight="220"
+                                           style="-fx-border-color: #b0c8b0;" editable="false">
+                                    <columns>
+                                        <TableColumn fx:id="colMed"  text="Medicamento" prefWidth="220"/>
+                                        <TableColumn fx:id="colDos"  text="Dosis"       prefWidth="100"/>
+                                        <TableColumn fx:id="colVia"  text="Vía"         prefWidth="90"/>
+                                        <TableColumn fx:id="colFrec" text="Frecuencia"  prefWidth="180"/>
+                                    </columns>
+                                </TableView>
+                                <Label text="Indicaciones adicionales" style="-fx-text-fill: #444444;"/>
+                                <TextArea fx:id="txtIndicaciones" prefHeight="70" wrapText="true" editable="false"
+                                          style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #f5f5f5;"/>
+                                <Label text="Fecha de control" style="-fx-text-fill: #444444;"/>
+                                <TextField fx:id="txtFechaControl" editable="false"
+                                           style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 7; -fx-background-color: #f5f5f5;"/>
+                            </VBox>
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+
+                <!-- PESTAÑA 4: Vacunación -->
+                <Tab text="💉 Vacunación" closable="false">
+                    <ScrollPane fitToWidth="true" style="-fx-background: #f0f7f2;">
+                        <VBox spacing="14" style="-fx-padding: 20;">
+
+                            <!-- Tabla de vacunas -->
+                            <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                                <Label text="REGISTRO DE VACUNACIÓN" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                                <Separator/>
+                                <TableView fx:id="tablaVacunasExp" prefHeight="260"
+                                           style="-fx-border-color: #b0c8b0;" editable="false">
+                                    <columns>
+                                        <TableColumn fx:id="colExpVacFecha"      text="Fecha Aplic."  prefWidth="110"/>
+                                        <TableColumn fx:id="colExpVacNombre"     text="Vacuna"        prefWidth="170"/>
+                                        <TableColumn fx:id="colExpVacEnfermedad" text="Contra"        prefWidth="140"/>
+                                        <TableColumn fx:id="colExpVacDosis"      text="Dosis"         prefWidth="80"/>
+                                        <TableColumn fx:id="colExpVacVia"        text="Vía"           prefWidth="70"/>
+                                        <TableColumn fx:id="colExpVacProxima"    text="Próxima Dosis" prefWidth="120"/>
+                                        <TableColumn fx:id="colExpVacLote"       text="Lote"          prefWidth="90"/>
+                                        <TableColumn fx:id="colExpVacVet"        text="Veterinario"   prefWidth="130"/>
+                                    </columns>
+                                </TableView>
+                            </VBox>
+
+                            <!-- Estado vacunal -->
+                            <VBox spacing="10" style="-fx-background-color: #ffffff; -fx-background-radius: 10; -fx-padding: 16; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                                <Label text="ESTADO VACUNAL" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                                <Separator/>
+                                <HBox spacing="16">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Carbón Sintomático" style="-fx-text-fill: #555; -fx-font-size: 11;"/>
+                                        <TextField fx:id="txtExpCarbon" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Brucelosis (RB51)" style="-fx-text-fill: #555; -fx-font-size: 11;"/>
+                                        <TextField fx:id="txtExpBrucela" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="IBR / DVB" style="-fx-text-fill: #555; -fx-font-size: 11;"/>
+                                        <TextField fx:id="txtExpIBR" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Leptospira" style="-fx-text-fill: #555; -fx-font-size: 11;"/>
+                                        <TextField fx:id="txtExpLepto" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Clostridios" style="-fx-text-fill: #555; -fx-font-size: 11;"/>
+                                        <TextField fx:id="txtExpClostridios" editable="false"
+                                                   style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6; -fx-background-color: #f5f5f5;"/>
+                                    </VBox>
+                                </HBox>
+                                <VBox spacing="4">
+                                    <Label text="Observaciones" style="-fx-text-fill: #444;"/>
+                                    <TextArea fx:id="txtExpObsVacunas" prefHeight="60" wrapText="true" editable="false"
+                                              style="-fx-border-color: #b0c8b0; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #f5f5f5;"/>
+                                </VBox>
+                            </VBox>
+
+                        </VBox>
+                    </ScrollPane>
+                </Tab>
+
+            </TabPane>
+        </VBox>
+    </center>
+</BorderPane>

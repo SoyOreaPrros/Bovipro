@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.net.URL?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controllers.ReportesController"
+            prefWidth="1000" prefHeight="650"
+            style="-fx-background-color: #f0f7f2;">
+    <stylesheets><URL value="@estilo.css"/></stylesheets>
+
+    <!-- ENCABEZADO -->
+    <top>
+        <HBox styleClass="header-bar" alignment="CENTER_LEFT" spacing="14">
+            <Button text="← Dashboard" onAction="#irDashboard"
+                    style="-fx-background-color: #3a8060; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-background-radius: 4;
+                           -fx-cursor: hand; -fx-padding: 6 14;"/>
+            <Label text="📊 Efectividad de Tratamientos" styleClass="header-titulo"/>
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="16" style="-fx-padding: 20; -fx-background-color: #f0f7f2;">
+
+            <!-- ── TARJETAS RESUMEN ── -->
+            <HBox spacing="14">
+
+                <!-- Total -->
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: white; -fx-background-radius: 10;
+                             -fx-padding: 18; -fx-border-color: #b0c8b0; -fx-border-radius: 10;">
+                    <Label text="💊 Total"
+                           style="-fx-text-fill: #555; -fx-font-size: 12;"/>
+                    <Label fx:id="lblTotalTrat"
+                           style="-fx-font-size: 34; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <Label text="tratamientos"
+                           style="-fx-text-fill: #888; -fx-font-size: 11;"/>
+                </VBox>
+
+                <!-- Efectivos -->
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                             -fx-padding: 18; -fx-border-color: #66bb6a; -fx-border-radius: 10;">
+                    <Label text="✅ Efectivos"
+                           style="-fx-text-fill: #2d6a4f; -fx-font-size: 12; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblEfectivos"
+                           style="-fx-font-size: 34; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                    <Label text="con resultado positivo"
+                           style="-fx-text-fill: #4a9b6f; -fx-font-size: 11;"/>
+                </VBox>
+
+                <!-- No efectivos -->
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: #ffebee; -fx-background-radius: 10;
+                             -fx-padding: 18; -fx-border-color: #ef9a9a; -fx-border-radius: 10;">
+                    <Label text="❌ No efectivos"
+                           style="-fx-text-fill: #c62828; -fx-font-size: 12; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblNoEfectivos"
+                           style="-fx-font-size: 34; -fx-font-weight: bold; -fx-text-fill: #c62828;"/>
+                    <Label text="sin resultado positivo"
+                           style="-fx-text-fill: #e57373; -fx-font-size: 11;"/>
+                </VBox>
+
+                <!-- En curso -->
+                <VBox alignment="CENTER" HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: #fff8e1; -fx-background-radius: 10;
+                             -fx-padding: 18; -fx-border-color: #ffd54f; -fx-border-radius: 10;">
+                    <Label text="⏳ En curso"
+                           style="-fx-text-fill: #a07800; -fx-font-size: 12; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblEnCurso"
+                           style="-fx-font-size: 34; -fx-font-weight: bold; -fx-text-fill: #a07800;"/>
+                    <Label text="pendientes de resultado"
+                           style="-fx-text-fill: #c8a000; -fx-font-size: 11;"/>
+                </VBox>
+
+            </HBox>
+
+            <!-- ── FILTROS ── -->
+            <HBox spacing="12" alignment="CENTER_LEFT"
+                  style="-fx-background-color: white; -fx-background-radius: 8;
+                         -fx-border-color: #c8ddc8; -fx-border-radius: 8; -fx-padding: 12 16;">
+                <Label text="Filtrar por:" style="-fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Label text="Animal:" style="-fx-text-fill: #555;"/>
+                <ComboBox fx:id="cbxFiltroAnimal" prefWidth="140"/>
+                <Label text="Resultado:" style="-fx-text-fill: #555;"/>
+                <ComboBox fx:id="cbxFiltroResultado" prefWidth="140"/>
+                <Button text="🔍 Aplicar filtro" onAction="#onFiltrar"
+                        style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                               -fx-font-weight: bold; -fx-background-radius: 6;
+                               -fx-cursor: hand; -fx-padding: 8 18;"/>
+                <Button text="🔄 Ver todos" onAction="#onLimpiarFiltro"
+                        style="-fx-background-color: #777; -fx-text-fill: white;
+                               -fx-background-radius: 6; -fx-cursor: hand; -fx-padding: 8 16;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblMensaje" text=""/>
+            </HBox>
+
+            <!-- ── TABLA ── -->
+            <VBox spacing="8" VBox.vgrow="ALWAYS"
+                  style="-fx-background-color: white; -fx-background-radius: 10;
+                         -fx-border-color: #c8ddc8; -fx-border-radius: 10; -fx-padding: 16;">
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Historial de tratamientos"
+                           style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #2d6a4f;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Selecciona una fila y cambia su resultado:"
+                           style="-fx-font-size: 11; -fx-font-style: italic; -fx-text-fill: #777;"/>
+                    <Button text="✅ Marcar efectivo" onAction="#onMarcarEfectivo"
+                            style="-fx-background-color: #4a9b6f; -fx-text-fill: white;
+                                   -fx-font-weight: bold; -fx-background-radius: 6;
+                                   -fx-cursor: hand; -fx-padding: 7 14;"/>
+                    <Button text="❌ Marcar no efectivo" onAction="#onMarcarNoEfectivo"
+                            style="-fx-background-color: #e53935; -fx-text-fill: white;
+                                   -fx-font-weight: bold; -fx-background-radius: 6;
+                                   -fx-cursor: hand; -fx-padding: 7 14;"/>
+                    <Button text="⏳ En curso" onAction="#onMarcarEnCurso"
+                            style="-fx-background-color: #f5a623; -fx-text-fill: white;
+                                   -fx-font-weight: bold; -fx-background-radius: 6;
+                                   -fx-cursor: hand; -fx-padding: 7 14;"/>
+                </HBox>
+
+                <Separator/>
+
+                <TableView fx:id="tablaTratamientos" VBox.vgrow="ALWAYS">
+                    <placeholder>
+                        <Label text="No hay tratamientos que mostrar."
+                               style="-fx-font-size: 12; -fx-font-style: italic; -fx-text-fill: #777;"/>
+                    </placeholder>
+                    <columns>
+                        <TableColumn fx:id="colAnimal"      text="Animal"       prefWidth="110"/>
+                        <TableColumn fx:id="colMedicamento" text="Medicamento"  prefWidth="140"/>
+                        <TableColumn fx:id="colDosis"       text="Dosis"        prefWidth="75"/>
+                        <TableColumn fx:id="colDuracion"    text="Duración"     prefWidth="85"/>
+                        <TableColumn fx:id="colFecha"       text="Fecha"        prefWidth="100"/>
+                        <TableColumn fx:id="colResultado"   text="Resultado"    prefWidth="130"/>
+                        <TableColumn fx:id="colNota"        text="Notas"        prefWidth="280"/>
+                    </columns>
+                </TableView>
+
+                <!-- Leyenda de colores -->
+                <HBox spacing="20" alignment="CENTER_LEFT"
+                      style="-fx-padding: 6 0 0 0;">
+                    <Label text="Leyenda:" style="-fx-font-size: 11; -fx-text-fill: #555; -fx-font-weight: bold;"/>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="  " style="-fx-background-color: #e8f5e9; -fx-border-color: #66bb6a; -fx-padding: 4 14;"/>
+                        <Label text="Efectivo" style="-fx-font-size: 11; -fx-text-fill: #2d6a4f;"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="  " style="-fx-background-color: #ffebee; -fx-border-color: #ef9a9a; -fx-padding: 4 14;"/>
+                        <Label text="No efectivo" style="-fx-font-size: 11; -fx-text-fill: #c62828;"/>
+                    </HBox>
+                    <HBox spacing="5" alignment="CENTER_LEFT">
+                        <Label text="  " style="-fx-background-color: #fff8e1; -fx-border-color: #ffd54f; -fx-padding: 4 14;"/>
+                        <Label text="En curso" style="-fx-font-size: 11; -fx-text-fill: #a07800;"/>
+                    </HBox>
+                </HBox>
+
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
